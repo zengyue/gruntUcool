@@ -1,5 +1,7 @@
 'use strict';
 
+var comboProxy = require('combo-proxy');
+
 module.exports = function (grunt) {
   grunt.initConfig({
     connect: {
@@ -7,7 +9,10 @@ module.exports = function (grunt) {
         options: {
           // port: 8000, //默认就是8000端口
           keepalive: true,
-          hostname: '*'
+          hostname: '*', 
+          middleware: function(connect, options){
+            return [comboProxy({root: __dirname})];
+          }
         }
       }
     }
